@@ -1,0 +1,13 @@
+.vscode/
+.micropico
+**/node_modules/
+**/.venv/
+**/__pycache__/
+**/.pio/
+**/.tools/
+tinyml_ambiente/web/dist/
+tinyml_ambiente/web/preview.png
+.env
+.env.*
+!.env.example
+*.log

@@ -1,0 +1,10 @@
+{
+  "rules": [
+    {"class":"critico","mode":"any","conditions":[["temperatura_c","ge",35],["umidade_pct","ge",90]]},
+    {"class":"critico","mode":"all","conditions":[["presenca","eq",1],["temperatura_c","ge",32]]},
+    {"class":"critico","mode":"all","conditions":[["presenca","eq",1],["umidade_pct","ge",85]]},
+    {"class":"alerta","mode":"any","conditions":[["temperatura_c","ge",30],["umidade_pct","ge",80]]},
+    {"class":"presenca","mode":"all","conditions":[["presenca","eq",1]]}
+  ],
+  "default":"normal"
+}

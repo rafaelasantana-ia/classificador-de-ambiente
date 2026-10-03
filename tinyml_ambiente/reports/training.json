@@ -1,0 +1,529 @@
+{
+  "synthetic_labels": true,
+  "limitation": "Aprende regras fornecidas, não demonstra descoberta de estados ambientais.",
+  "python": "3.14.6",
+  "dependencies": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0",
+    "openpyxl": "3.1.5"
+  },
+  "data_sha256": "daf442a7829576e7703710459854047e5768db9fd92150043f286a0bae45ef3f",
+  "rules_sha256": "d8e138b78c6b39437c86e03bddd98bcec10d4b36b1258c015044384d16a36bbe",
+  "data_audit": {
+    "original_columns": [
+      "Unnamed: 0"
+    ],
+    "source_columns": [
+      "temperatura_c",
+      "umidade_pct",
+      "ir",
+      "presenca"
+    ],
+    "measurements": 235,
+    "discarded_log_lines": 1,
+    "invalid_rows": 0,
+    "valid_rows": 235,
+    "duplicate_features": 156,
+    "unique_features": 79,
+    "statistics": {
+      "temperatura_c": {
+        "count": 235.0,
+        "mean": 27.200000762939453,
+        "std": 2.459587812423706,
+        "min": 24.0,
+        "25%": 25.0,
+        "50%": 26.0,
+        "75%": 29.0,
+        "max": 33.0
+      },
+      "umidade_pct": {
+        "count": 235.0,
+        "mean": 67.19574737548828,
+        "std": 15.262797355651855,
+        "min": 51.0,
+        "25%": 56.5,
+        "50%": 62.0,
+        "75%": 73.0,
+        "max": 98.0
+      },
+      "presenca": {
+        "count": 235.0,
+        "mean": 0.09787233918905258,
+        "std": 0.2977762222290039,
+        "min": 0.0,
+        "25%": 0.0,
+        "50%": 0.0,
+        "75%": 0.0,
+        "max": 1.0
+      }
+    },
+    "presence_counts": {
+      "0.0": 212,
+      "1.0": 23
+    },
+    "classes_all_measurements": {
+      "normal": 135,
+      "critico": 50,
+      "alerta": 45,
+      "presenca": 5
+    }
+  },
+  "cv": {
+    "logistic": {
+      "accuracy": 0.7281609195402299,
+      "precision_macro": 0.638771645021645,
+      "recall_macro": 0.6845012626262625,
+      "f1_macro": 0.6132362155388471,
+      "warnings": [
+        "Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior."
+      ],
+      "pickle_bytes": 1256,
+      "cv_classification": {
+        "alerta": {
+          "precision": 0.7894736842105263,
+          "recall": 0.6521739130434783,
+          "f1-score": 0.7142857142857143,
+          "support": 23.0
+        },
+        "critico": {
+          "precision": 0.7777777777777778,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.7777777777777778,
+          "support": 18.0
+        },
+        "normal": {
+          "precision": 0.7647058823529411,
+          "recall": 0.8125,
+          "f1-score": 0.7878787878787878,
+          "support": 16.0
+        },
+        "presenca": {
+          "precision": 0.2,
+          "recall": 0.5,
+          "f1-score": 0.2857142857142857,
+          "support": 2.0
+        },
+        "accuracy": 0.7288135593220338,
+        "macro avg": {
+          "precision": 0.6329893360853114,
+          "recall": 0.685612922705314,
+          "f1-score": 0.6414141414141414,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.7592065907540536,
+          "recall": 0.7288135593220338,
+          "f1-score": 0.7390857729840781,
+          "support": 59.0
+        }
+      },
+      "cv_confusion_matrix": [
+        [
+          15,
+          3,
+          4,
+          1
+        ],
+        [
+          1,
+          14,
+          0,
+          3
+        ],
+        [
+          3,
+          0,
+          13,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "estimated_numeric_bytes": 88,
+      "deployment": "Escalonamento + produtos escalares; exportação adicional necessária."
+    },
+    "tree": {
+      "accuracy": 0.864367816091954,
+      "precision_macro": 0.7338789682539683,
+      "recall_macro": 0.7837752525252526,
+      "f1_macro": 0.7279510717330411,
+      "warnings": [],
+      "pickle_bytes": 2750,
+      "cv_classification": {
+        "alerta": {
+          "precision": 1.0,
+          "recall": 0.9130434782608695,
+          "f1-score": 0.9545454545454546,
+          "support": 23.0
+        },
+        "critico": {
+          "precision": 0.8666666666666667,
+          "recall": 0.7222222222222222,
+          "f1-score": 0.7878787878787878,
+          "support": 18.0
+        },
+        "normal": {
+          "precision": 0.9411764705882353,
+          "recall": 1.0,
+          "f1-score": 0.9696969696969697,
+          "support": 16.0
+        },
+        "presenca": {
+          "precision": 0.16666666666666666,
+          "recall": 0.5,
+          "f1-score": 0.25,
+          "support": 2.0
+        },
+        "accuracy": 0.864406779661017,
+        "macro avg": {
+          "precision": 0.7436274509803921,
+          "recall": 0.7838164251207729,
+          "f1-score": 0.740530303030303,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.9151213027583915,
+          "recall": 0.864406779661017,
+          "f1-score": 0.883923985618901,
+          "support": 59.0
+        }
+      },
+      "cv_confusion_matrix": [
+        [
+          21,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          13,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          16,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1
+        ]
+      ],
+      "nodes": 17,
+      "estimated_numeric_bytes": 272,
+      "deployment": "C++ direto, <= 4 comparações por inferência."
+    },
+    "forest": {
+      "accuracy": 0.8126436781609195,
+      "precision_macro": 0.7557539682539683,
+      "recall_macro": 0.867739898989899,
+      "f1_macro": 0.7564484126984127,
+      "warnings": [],
+      "pickle_bytes": 53341,
+      "cv_classification": {
+        "alerta": {
+          "precision": 1.0,
+          "recall": 0.6956521739130435,
+          "f1-score": 0.8205128205128205,
+          "support": 23.0
+        },
+        "critico": {
+          "precision": 0.875,
+          "recall": 0.7777777777777778,
+          "f1-score": 0.8235294117647058,
+          "support": 18.0
+        },
+        "normal": {
+          "precision": 0.8,
+          "recall": 1.0,
+          "f1-score": 0.8888888888888888,
+          "support": 16.0
+        },
+        "presenca": {
+          "precision": 0.2857142857142857,
+          "recall": 1.0,
+          "f1-score": 0.4444444444444444,
+          "support": 2.0
+        },
+        "accuracy": 0.8135593220338984,
+        "macro avg": {
+          "precision": 0.7401785714285714,
+          "recall": 0.8683574879227053,
+          "f1-score": 0.744343891402715,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.883414043583535,
+          "recall": 0.8135593220338984,
+          "f1-score": 0.8272277185537404,
+          "support": 59.0
+        }
+      },
+      "cv_confusion_matrix": [
+        [
+          16,
+          2,
+          4,
+          1
+        ],
+        [
+          0,
+          14,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          16,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2
+        ]
+      ],
+      "nodes": 438,
+      "estimated_numeric_bytes": 7008,
+      "deployment": "32 árvores; maior custo e exportação adicional necessária."
+    },
+    "mlp": {
+      "accuracy": 0.9155172413793103,
+      "precision_macro": 0.6918560606060606,
+      "recall_macro": 0.7143308080808081,
+      "f1_macro": 0.7013941102756892,
+      "warnings": [
+        "Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior."
+      ],
+      "pickle_bytes": 36478,
+      "cv_classification": {
+        "alerta": {
+          "precision": 0.9545454545454546,
+          "recall": 0.9130434782608695,
+          "f1-score": 0.9333333333333333,
+          "support": 23.0
+        },
+        "critico": {
+          "precision": 0.8095238095238095,
+          "recall": 0.9444444444444444,
+          "f1-score": 0.8717948717948718,
+          "support": 18.0
+        },
+        "normal": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 16.0
+        },
+        "presenca": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "accuracy": 0.9152542372881356,
+        "macro avg": {
+          "precision": 0.6910173160173161,
+          "recall": 0.7143719806763285,
+          "f1-score": 0.7012820512820512,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.8902707462029497,
+          "recall": 0.9152542372881356,
+          "f1-score": 0.9009995654063451,
+          "support": 59.0
+        }
+      },
+      "cv_confusion_matrix": [
+        [
+          21,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          17,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          16,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0
+        ]
+      ],
+      "parameters": 88,
+      "estimated_numeric_bytes": 376,
+      "deployment": "3x8 + 8x4 + 4xclasses MACs, escalonamento e ativações; conversão adicional necessária."
+    },
+    "dummy": {
+      "accuracy": 0.3896551724137931,
+      "precision_macro": 0.09741379310344828,
+      "recall_macro": 0.25,
+      "f1_macro": 0.14017857142857143,
+      "warnings": [
+        "Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior."
+      ],
+      "pickle_bytes": 483,
+      "cv_classification": {
+        "alerta": {
+          "precision": 0.3898305084745763,
+          "recall": 1.0,
+          "f1-score": 0.5609756097560976,
+          "support": 23.0
+        },
+        "critico": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 18.0
+        },
+        "normal": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 16.0
+        },
+        "presenca": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2.0
+        },
+        "accuracy": 0.3898305084745763,
+        "macro avg": {
+          "precision": 0.09745762711864407,
+          "recall": 0.25,
+          "f1-score": 0.1402439024390244,
+          "support": 59.0
+        },
+        "weighted avg": {
+          "precision": 0.15196782533754669,
+          "recall": 0.3898305084745763,
+          "f1-score": 0.21868540719305501,
+          "support": 59.0
+        }
+      },
+      "cv_confusion_matrix": [
+        [
+          23,
+          0,
+          0,
+          0
+        ],
+        [
+          18,
+          0,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0
+        ]
+      ],
+      "estimated_numeric_bytes": 4,
+      "deployment": "Classe constante; referência."
+    }
+  },
+  "selected": "tree",
+  "folds": 2,
+  "train_unique": 59,
+  "test_unique": 20,
+  "holdout": {
+    "alerta": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 8.0
+    },
+    "critico": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 6.0
+    },
+    "normal": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 5.0
+    },
+    "presenca": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 1.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 20.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      8,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      6,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      5,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1
+    ]
+  ],
+  "split_warning": "Sem timestamps/sessões: split estratificado não mede generalização para novas sessões.",
+  "header_bytes": 1173
+}

@@ -1,0 +1,83 @@
+{
+  "cpp_sklearn_points": 13224,
+  "cpp_sklearn_mismatches": 0,
+  "cpp_rule_mismatches": 0,
+  "invalid_readings_rejected": 4,
+  "rule_disagreements": 3101,
+  "rule_agreement_fraction": 0.7655021173623714,
+  "examples": [
+    {
+      "features": [
+        0.0,
+        74.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "presenca"
+    },
+    {
+      "features": [
+        0.0,
+        75.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "presenca"
+    },
+    {
+      "features": [
+        0.0,
+        76.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "presenca"
+    },
+    {
+      "features": [
+        0.0,
+        77.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "presenca"
+    },
+    {
+      "features": [
+        0.0,
+        78.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "presenca"
+    },
+    {
+      "features": [
+        0.0,
+        79.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "presenca"
+    },
+    {
+      "features": [
+        0.0,
+        80.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "alerta"
+    },
+    {
+      "features": [
+        0.0,
+        81.0,
+        1.0
+      ],
+      "model": "critico",
+      "rule": "alerta"
+    }
+  ],
+  "scope": "Grade de inteiros DHT11 mais limiares da árvore; não é acurácia em dados reais."
+}

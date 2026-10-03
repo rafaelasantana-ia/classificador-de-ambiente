@@ -1,0 +1,27 @@
+{
+  "status": "success",
+  "platform_commit": "5d4561a05e3b212660ac6fdd3fbfb328d1988aa1",
+  "core_commit": "fd65f6d4ab168d4bb181a3709738fe353ac93585",
+  "environments": {
+    "picow": {
+      "flash_bytes": 301480,
+      "static_ram_bytes": 69152
+    },
+    "picow_rules": {
+      "flash_bytes": 301528,
+      "static_ram_bytes": 69152
+    }
+  },
+  "physical_test": false,
+  "uploaded": false,
+  "files": {
+    "exact_rules.uf2": {
+      "bytes": 627200,
+      "sha256": "6ffc86be4777f8d02efb86d20508f458988503df902c01e89ee91a35b5a3c356"
+    },
+    "tinyml_tree.uf2": {
+      "bytes": 627200,
+      "sha256": "5e9744914ab034bbbe143793a03e5b779a5bb78961da1350dec5990e00a43c62"
+    }
+  }
+}
