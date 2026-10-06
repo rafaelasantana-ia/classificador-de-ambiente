@@ -1,0 +1,133 @@
+{
+  "grid_points": 17982,
+  "predictions": [
+    {
+      "presenca": 0,
+      "classe": "alerta",
+      "count": 2800,
+      "percent": 31.142253364475586
+    },
+    {
+      "presenca": 0,
+      "classe": "critico",
+      "count": 2991,
+      "percent": 33.2665999332666
+    },
+    {
+      "presenca": 0,
+      "classe": "normal",
+      "count": 3200,
+      "percent": 35.59114670225782
+    },
+    {
+      "presenca": 0,
+      "classe": "presenca",
+      "count": 0,
+      "percent": 0.0
+    },
+    {
+      "presenca": 1,
+      "classe": "alerta",
+      "count": 1077,
+      "percent": 11.978645311978646
+    },
+    {
+      "presenca": 1,
+      "classe": "critico",
+      "count": 4714,
+      "percent": 52.430207985763545
+    },
+    {
+      "presenca": 1,
+      "classe": "normal",
+      "count": 0,
+      "percent": 0.0
+    },
+    {
+      "presenca": 1,
+      "classe": "presenca",
+      "count": 3200,
+      "percent": 35.59114670225782
+    }
+  ],
+  "low_coverage_regions": [
+    {
+      "temp_band": "20-25",
+      "humidity_band": "40-60",
+      "presenca": 1.0,
+      "samples": 1,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "20-25",
+      "humidity_band": "60-70",
+      "presenca": 1.0,
+      "samples": 3,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "20-25",
+      "humidity_band": "70-80",
+      "presenca": 1.0,
+      "samples": 0,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "20-25",
+      "humidity_band": "80-90",
+      "presenca": 1.0,
+      "samples": 1,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "30-35",
+      "humidity_band": "40-60",
+      "presenca": 1.0,
+      "samples": 3,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "30-35",
+      "humidity_band": "60-70",
+      "presenca": 1.0,
+      "samples": 2,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "30-35",
+      "humidity_band": "90-100",
+      "presenca": 1.0,
+      "samples": 4,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "35-40",
+      "humidity_band": "40-60",
+      "presenca": 0.0,
+      "samples": 0,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "35-40",
+      "humidity_band": "60-70",
+      "presenca": 0.0,
+      "samples": 0,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "35-40",
+      "humidity_band": "70-80",
+      "presenca": 0.0,
+      "samples": 2,
+      "low_coverage": true
+    },
+    {
+      "temp_band": "35-40",
+      "humidity_band": "90-100",
+      "presenca": 0.0,
+      "samples": 0,
+      "low_coverage": true
+    }
+  ],
+  "note": "Baixa cobertura indica regiões com poucas combinações no treinamento; não é métrica de erro."
+}

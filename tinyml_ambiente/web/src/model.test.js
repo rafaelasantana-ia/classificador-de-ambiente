@@ -8,9 +8,9 @@ test('prioridades e limites ambientais', () => {
   assert.equal(exact(51,60,0),null); assert.equal(tree(NaN,60,0),null);
 });
 test('árvore preserva limiares do firmware e divergência conhecida', () => {
-  assert.equal(tree(35,60,0),'alerta'); assert.equal(tree(29.8,78,0),'normal');
-  assert.equal(tree(29.9,79,0),'alerta'); assert.equal(tree(24,89.9,0),'critico');
-  assert.equal(tree(29.9,73.5,1),'presenca'); assert.equal(tree(30,73.5,1),'alerta');
+  assert.equal(tree(34.9,60,0),'alerta'); assert.equal(tree(35,60,0),'critico');
+  assert.equal(tree(29.9,79,0),'normal'); assert.equal(tree(29.9,80,0),'alerta');
+  assert.equal(tree(24,89.9,0),'critico'); assert.equal(tree(29.9,73.5,1),'presenca'); assert.equal(tree(30,73.5,1),'alerta');
 });
 test('serial aceita firmware e ignora diagnósticos e leituras inválidas', () => {
   assert.equal(parseSerial('T=24.0 U=70.0 IR=0 presenca=1 classe=presenca').presenca,1);

@@ -4,15 +4,15 @@
   "core_commit": "fd65f6d4ab168d4bb181a3709738fe353ac93585",
   "environments": {
     "picow": {
-      "flash_bytes": 302184,
+      "flash_bytes": 302200,
       "static_ram_bytes": 69236
     },
     "picow_rules": {
-      "flash_bytes": 301528,
-      "static_ram_bytes": 69152
+      "flash_bytes": 301824,
+      "static_ram_bytes": 69236
     },
     "picow_benchmark": {
-      "flash_bytes": 303184,
+      "flash_bytes": 303208,
       "static_ram_bytes": 69248,
       "physical_benchmark_required": true
     }
@@ -21,12 +21,12 @@
   "uploaded": false,
   "files": {
     "exact_rules.uf2": {
-      "bytes": 627200,
-      "sha256": "6ffc86be4777f8d02efb86d20508f458988503df902c01e89ee91a35b5a3c356"
+      "bytes": 628224,
+      "sha256": "bd399ec1e41195fc2f24d56d90459dab6e579e05793b0a3a7b7c50678b93ed22"
     },
     "tinyml_tree.uf2": {
-      "bytes": 627200,
-      "sha256": "5e9744914ab034bbbe143793a03e5b779a5bb78961da1350dec5990e00a43c62"
+      "bytes": 628736,
+      "sha256": "b4b265adff7338cd5f38639ff77b405931314156ed3ac5d669d8e1cc5dca2b78"
     }
   }
 }

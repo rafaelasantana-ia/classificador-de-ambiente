@@ -156,3 +156,11 @@ O pipeline gera dataset, modelo, headers C++, métricas por classe, matriz de co
 O firmware mantém as últimas 10 leituras em arrays fixos, calcula média e tendência e transmite JSON por linha a 115200 baud. Entradas fora de temperatura [20, 39,8] °C ou umidade [40, 98] % são marcadas como `ood: true` e classificadas pelas regras determinísticas. O ambiente PlatformIO `picow_benchmark` imprime média, mínimo, máximo de inferência e RAM livre a cada 10 leituras.
 
 Limitações: os rótulos continuam derivados das regras fornecidas, parte importante do dataset é sintética, não há timestamps de sessão na coleta original, e o benchmark precisa ser observado fisicamente no hardware. O projeto continua sendo uma prova de conceito acadêmica de TinyML, não um sistema industrial validado.
+
+## Avaliação metodológica atual
+
+O dataset expandido agora possui 1.000 registros, 844 combinações únicas, 235 registros `real` e 765 `sintetico`, distribuídos em 250 exemplos por classe. As 156 duplicatas de combinação presentes na coleta original são preservadas no arquivo bruto, mas removidas antes da separação treino/validação/teste. A divisão atual usa 70% treino, 15% validação e 15% teste, com validação cruzada estratificada de 5 folds no treino. O arquivo `data/processed/test_generalization.csv` contém 240 combinações não usadas no treinamento.
+
+Foram retreinados Logistic Regression, Decision Tree, Random Forest, MLP e baseline. A árvore foi escolhida por F1 Macro, recall crítico, estabilidade e custo embarcado, não apenas por accuracy. O teste final da árvore apresentou accuracy de aproximadamente 99,2%, F1 Macro de 99,3% e recall crítico de 97,1%. O conjunto de generalização sintético apresentou 100%, mas esse resultado deve ser interpretado com cautela: seus rótulos também foram gerados pelas mesmas regras determinísticas.
+
+Relatórios adicionais: `reports/dataset_analysis.md`, `reports/model_comparison.csv`, `reports/model_evaluation.md`, `reports/generalization_test.csv`, `reports/classification_report.csv`, `reports/tree_depth_sweep.csv`, `reports/confusion_matrix.png`, `reports/decision_regions_presence_0.png`, `reports/decision_regions_presence_1.png` e `reports/coverage_analysis.json`.

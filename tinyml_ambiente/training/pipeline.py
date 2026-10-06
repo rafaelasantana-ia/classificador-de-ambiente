@@ -1,5 +1,6 @@
 """Pipeline único: expansão, limpeza, treinamento, comparação e verificação."""
 import argparse
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -21,8 +22,16 @@ def main():
     generate(root / "data/dataset_expanded.csv", root / "data/rules.json")
     run([python, str(root / "training/train.py"), "--data", "data/dataset_expanded.csv", "--rules", "data/rules.json"])
     run([python, str(root / "training/compare_rules.py")])
-    if args.compiler:
-        run([python, str(root / "training/verify_export.py"), "--compiler", args.compiler])
+    run([python, str(root / "training/coverage.py")])
+    shutil.copyfile(root / "data/dataset_expanded.csv", root / "web/src/data/clean.csv")
+    shutil.copyfile(root / "reports/training.json", root / "web/src/data/training.json")
+    shutil.copyfile(root / "data/rules.json", root / "web/src/data/rules.json")
+    compiler = args.compiler
+    zig = root / ".tools/ziglang/zig.exe"
+    if compiler:
+        run([python, str(root / "training/verify_export.py"), "--compiler", compiler])
+    elif zig.exists():
+        run([python, str(root / "training/verify_export.py"), "--compiler", str(zig), "--zig"])
     print("Pipeline concluído. Consulte reports/.")
 
 

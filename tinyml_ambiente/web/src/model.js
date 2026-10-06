@@ -13,13 +13,14 @@ export function tree(t,h,p) {
   if (!valid(t,h,p)) return null;
   t = Math.fround(t); h = Math.fround(h);
   if (p <= .5) {
-    if (t <= 29.85) return h <= 78.8 ? 'normal' : h <= 89.8 ? 'alerta' : 'critico';
-    return t <= 35 ? h <= 90.15 ? 'alerta' : 'critico' : 'critico';
+    if (t <= 29.95) return h <= 79.9 ? 'normal' : h <= 89.5 ? 'alerta' : 'critico';
+    return h <= 89.75 && t <= 34.95 ? 'alerta' : 'critico';
   }
-  if (t <= 31.8) {
-    if (h <= 80) return t <= 29.95 ? 'presenca' : 'alerta';
-    return h <= 85.05 ? 'alerta' : 'critico';
+  if (t <= 29.95) {
+    if (h <= 79.9) return 'presenca';
+    return h <= 85.25 ? 'alerta' : 'critico';
   }
+  if (t <= 31.5) return h <= 85 ? 'alerta' : 'critico';
   return 'critico';
 }
 export function parseSerial(line) {

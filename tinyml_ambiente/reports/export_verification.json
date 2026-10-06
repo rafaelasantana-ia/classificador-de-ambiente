@@ -1,29 +1,11 @@
 {
-  "cpp_sklearn_points": 16008,
+  "cpp_sklearn_points": 14994,
   "cpp_sklearn_mismatches": 0,
   "cpp_rule_mismatches": 0,
   "invalid_readings_rejected": 4,
-  "rule_disagreements": 1466,
-  "rule_agreement_fraction": 0.9084207896051975,
+  "rule_disagreements": 1334,
+  "rule_agreement_fraction": 0.9110310790983059,
   "examples": [
-    {
-      "features": [
-        0.0,
-        79.0,
-        0.0
-      ],
-      "model": "alerta",
-      "rule": "normal"
-    },
-    {
-      "features": [
-        0.0,
-        80.0,
-        1.0
-      ],
-      "model": "presenca",
-      "rule": "alerta"
-    },
     {
       "features": [
         0.0,
@@ -36,7 +18,7 @@
     {
       "features": [
         0.0,
-        78.80000305175781,
+        79.90000915527344,
         0.0
       ],
       "model": "alerta",
@@ -45,16 +27,16 @@
     {
       "features": [
         0.0,
-        78.80001068115234,
-        0.0
+        79.90000915527344,
+        1.0
       ],
       "model": "alerta",
-      "rule": "normal"
+      "rule": "presenca"
     },
     {
       "features": [
         0.0,
-        89.80000305175781,
+        89.50000762939453,
         0.0
       ],
       "model": "critico",
@@ -63,7 +45,7 @@
     {
       "features": [
         0.0,
-        89.80001068115234,
+        89.74999237060547,
         0.0
       ],
       "model": "critico",
@@ -72,7 +54,25 @@
     {
       "features": [
         0.0,
-        79.99999237060547,
+        89.75,
+        0.0
+      ],
+      "model": "critico",
+      "rule": "alerta"
+    },
+    {
+      "features": [
+        0.0,
+        89.75000762939453,
+        0.0
+      ],
+      "model": "critico",
+      "rule": "alerta"
+    },
+    {
+      "features": [
+        0.0,
+        79.90000915527344,
         0.0
       ],
       "model": "alerta",

@@ -1,4 +1,4 @@
-"""Compara o modelo exportado com as regras determinísticas em uma grade ampla."""
+"""Compara o modelo selecionado com as regras em uma grade do domínio."""
 import argparse
 import json
 import pickle
@@ -6,6 +6,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from sklearn.metrics import accuracy_score, classification_report, f1_score
 
 from preprocessing import FEATURES, label_rules
 
@@ -18,34 +19,16 @@ def main():
     args = parser.parse_args()
     artifact = pickle.loads(Path(args.model).read_bytes())
     rng = np.random.default_rng(42)
-    grid = np.column_stack([
-        rng.uniform(0, 50, args.samples),
-        rng.uniform(0, 100, args.samples),
-        rng.integers(0, 2, args.samples),
-    ]).astype(np.float32)
-    values = pd.DataFrame(grid, columns=FEATURES)
-    rules, _ = label_rules(values, args.rules)
-    model_names = np.asarray(artifact["classes"])[artifact["model"].predict(grid)]
-    different = model_names != rules.to_numpy()
-    by_pair = {}
-    for model_name, rule_name in zip(model_names[different], rules.to_numpy()[different]):
-        key = f"{model_name} -> {rule_name}"
-        by_pair[key] = by_pair.get(key, 0) + 1
-    report = {
-        "samples": args.samples,
-        "divergences": int(different.sum()),
-        "divergence_percent": float(different.mean() * 100),
-        "agreement_percent": float((~different).mean() * 100),
-        "divergences_by_pair": dict(sorted(by_pair.items(), key=lambda item: -item[1])),
-        "examples": [
-            {**{key: float(value) for key, value in zip(FEATURES, grid[i])}, "model": model_names[i], "rules": rules.iloc[i]}
-            for i in np.flatnonzero(different)[:25]
-        ],
-        "interpretation": "Divergências são esperadas em regiões pouco representadas; regras determinísticas continuam sendo o fallback de segurança.",
-    }
+    values = np.column_stack([rng.uniform(20, 40, args.samples), rng.uniform(40, 95, args.samples), rng.integers(0, 2, args.samples)]).astype(np.float32)
+    frame = pd.DataFrame(values, columns=FEATURES)
+    rules_labels, _ = label_rules(frame, args.rules)
+    model_names = np.asarray(artifact["classes"])[artifact["model"].predict(values)]
+    different = model_names != rules_labels.to_numpy()
+    report = {"samples": args.samples, "domain": {"temperature": [20, 40], "humidity": [40, 95], "presence": [0, 1]}, "accuracy_model_vs_rules": float(accuracy_score(rules_labels, model_names)), "f1_macro_model_vs_rules": float(f1_score(rules_labels, model_names, average="macro")), "divergences": int(different.sum()), "divergence_percent": float(different.mean() * 100), "classification_report": classification_report(rules_labels, model_names, labels=artifact["classes"], output_dict=True, zero_division=0), "examples": []}
+    report["examples"] = [{**{key: float(value) for key, value in zip(FEATURES, values[i])}, "model": model_names[i], "rules": rules_labels.iloc[i]} for i in np.flatnonzero(different)[:25]]
     Path("reports").mkdir(exist_ok=True)
     Path("reports/rules_comparison.json").write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(json.dumps(report, indent=2, ensure_ascii=False))
+    print(json.dumps({key: report[key] for key in ("samples", "accuracy_model_vs_rules", "f1_macro_model_vs_rules", "divergences", "divergence_percent")}, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":
