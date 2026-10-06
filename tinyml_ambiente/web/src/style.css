@@ -23,3 +23,4 @@ header{backdrop-filter:blur(12px);background:#fafbf8e8;position:sticky;top:0;z-i
 @media(max-width:850px){.content{padding-top:24px}.title-row{margin-bottom:21px}.source-bar{position:relative}}
 @media(max-width:550px){body{background:#f6f8f5}.card:hover{transform:none}.primary{width:100%}}
  .forecast .metric-top{color:#8b6a9e}.forecast .metric-value{color:#8b6a9e}.forecast{background:#faf6fc;border-color:#eadff0}.forecast .metric-bottom{color:#987fa3}
+.forecast:after{content:'IA temporal local · 10 leituras';display:block;color:#987fa3;font-size:9px;margin-top:8px}
