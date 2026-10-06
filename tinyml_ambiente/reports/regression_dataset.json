@@ -1,0 +1,21 @@
+{
+  "sequences": 180,
+  "sequence_length": 50,
+  "window": 10,
+  "horizon_steps": 30,
+  "horizon_seconds": 60,
+  "windows": 1980,
+  "origin": "sintetico",
+  "scenarios": {
+    "stable": 220,
+    "warm_slow": 220,
+    "warm_fast": 220,
+    "cool_slow": 220,
+    "cool_fast": 220,
+    "presence_in": 220,
+    "presence_long": 220,
+    "humidity_up": 220,
+    "humidity_down": 220
+  },
+  "warning": "A coleta real não possui timestamps/sessões suficientes; não foi usada como sequência temporal."
+}

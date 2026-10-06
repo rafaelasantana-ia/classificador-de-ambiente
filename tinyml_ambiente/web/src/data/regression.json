@@ -1,0 +1,96 @@
+{
+  "task": "regressao_temporal_temperatura",
+  "model": "linear",
+  "features": [
+    "temperatura_atual",
+    "umidade_atual",
+    "presenca_atual",
+    "media_temperatura_janela",
+    "media_umidade_janela",
+    "variacao_temperatura",
+    "variacao_umidade",
+    "tendencia_temperatura",
+    "tendencia_umidade",
+    "quantidade_presenca_janela"
+  ],
+  "target": "temp_future_60s",
+  "window_readings": 10,
+  "horizon_seconds": 60,
+  "split": "por sessao temporal: 60% treino, 20% validacao, 20% teste",
+  "samples": {
+    "total": 1980,
+    "train": 1188,
+    "validation": 396,
+    "test": 396,
+    "sessions": 180
+  },
+  "selection_rule": "menor MAE de validacao; entre modelos ate 5% do melhor, escolhe o mais simples exportavel",
+  "test": {
+    "mae": 1.0150757803945463,
+    "rmse": 1.3199118897848647,
+    "r2": 0.9219990145451481
+  },
+  "comparison": [
+    {
+      "modelo": "baseline_atual",
+      "tipo": "baseline",
+      "validacao_mae": 1.391818181818182,
+      "validacao_rmse": 1.9038712555148674,
+      "validacao_r2": 0.8717029218023031,
+      "teste_mae": 1.4965656565656564,
+      "teste_rmse": 2.1318300811625432,
+      "teste_r2": 0.7965229748563312
+    },
+    {
+      "modelo": "baseline_tendencia",
+      "tipo": "baseline",
+      "validacao_mae": 1.3036497474747473,
+      "validacao_rmse": 1.777986001346706,
+      "validacao_r2": 0.8881081932327533,
+      "teste_mae": 1.2266805555555556,
+      "teste_rmse": 1.6023435969705515,
+      "teste_r2": 0.8850466833765042
+    },
+    {
+      "modelo": "linear",
+      "tipo": "regressor",
+      "validacao_mae": 0.9566077229960497,
+      "validacao_rmse": 1.2323593669817474,
+      "validacao_r2": 0.9462453110809917,
+      "teste_mae": 1.0150757803945463,
+      "teste_rmse": 1.3199118897848647,
+      "teste_r2": 0.9219990145451481
+    },
+    {
+      "modelo": "ridge",
+      "tipo": "regressor",
+      "validacao_mae": 0.9559290740419455,
+      "validacao_rmse": 1.231218337977992,
+      "validacao_r2": 0.9463448068380826,
+      "teste_mae": 1.0149278757913496,
+      "teste_rmse": 1.3197312769668765,
+      "teste_r2": 0.9220203599304263
+    },
+    {
+      "modelo": "arvore",
+      "tipo": "regressor",
+      "validacao_mae": 1.1222252588697776,
+      "validacao_rmse": 1.6128776045752014,
+      "validacao_r2": 0.9079244259317613,
+      "teste_mae": 1.3199630278424472,
+      "teste_rmse": 1.744631701169197,
+      "teste_r2": 0.8637245179898664
+    },
+    {
+      "modelo": "floresta",
+      "tipo": "regressor",
+      "validacao_mae": 0.992925848224078,
+      "validacao_rmse": 1.5630554223281423,
+      "validacao_r2": 0.9135250406018471,
+      "teste_mae": 0.9938041201805602,
+      "teste_rmse": 1.4037508410151192,
+      "teste_r2": 0.9117752845206254
+    }
+  ],
+  "warning": "As janelas sao sinteticas e coerentes; a coleta real nao tem timestamps/sessoes para formar alvo futuro."
+}

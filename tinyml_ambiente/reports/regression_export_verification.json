@@ -1,0 +1,7 @@
+{
+  "points": 250,
+  "max_abs_error": 5.658555485155148e-05,
+  "mean_abs_error": 2.3109264817023245e-05,
+  "divergences_over_0_001": 0,
+  "compiler": ".tools/ziglang/zig.exe"
+}

@@ -34,6 +34,11 @@ export function parseSerial(line) {
         tendencia_umidade: Number(reading.tendencia_umidade || 0),
         media_temperatura: Number(reading.media_temperatura || reading.temperatura),
         media_umidade: Number(reading.media_umidade || reading.umidade),
+        temperatura_prevista_60s: Number(reading.temperatura_prevista_60s ?? reading.temperatura),
+        erro_estimado_mae: Number(reading.erro_estimado_mae || 0),
+        alerta_futuro: Boolean(reading.alerta_futuro),
+        previsao_pronta: Boolean(reading.previsao_pronta),
+        tempo_regressao_us: Number(reading.tempo_regressao_us || 0),
         time: new Date().toLocaleTimeString('pt-BR')
       };
     }
