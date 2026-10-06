@@ -10,7 +10,7 @@ npm install
 npm run dev
 ```
 
-Abra http://127.0.0.1:5173. O painel oferece gráficos das 235 medições coletadas, reprodução, filtros, exportação CSV, comparação de modelos e um simulador da árvore e das regras exatas.
+Abra http://127.0.0.1:5173. O painel oferece gráficos da coleta expandida, reprodução, filtros, exportação CSV, comparação de modelos e um simulador da árvore e das regras exatas.
 
 Para acompanhar a placa via USB, use Chrome ou Edge, feche outros monitores seriais, clique em **Conectar Pico W** e selecione a porta USB da placa. A conexão usa 115200 baud e a saída do firmware incluído.
 
@@ -31,6 +31,6 @@ Mais detalhes em [tinyml_ambiente/web/README.md](tinyml_ambiente/web/README.md).
 
 Pinagem: DHT11 GP2, infravermelho GP14, LED GP16 e buzzer GP17.
 
-O modelo selecionado é uma Decision Tree de profundidade 4 e 17 nós. As classes derivam de regras definidas; a árvore aproxima essas regras e pode divergir em condições pouco representadas na coleta. O teste reservado contém apenas 20 amostras e não comprova generalização para novas sessões.
+O modelo selecionado é uma Decision Tree de profundidade 4 e 25 nós. As classes derivam de regras definidas; a árvore aproxima essas regras e pode divergir em condições pouco representadas na coleta. O teste reservado expandido contém 116 combinações únicas e não comprova generalização para novas sessões.
 
 Consulte [a documentação técnica](tinyml_ambiente/README.md) antes de gravar os UF2: ela descreve a pinagem e as diferenças entre os binários distribuídos.

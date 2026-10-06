@@ -11,3 +11,9 @@ tinyml_ambiente/web/preview.png
 .env.*
 !.env.example
 *.log
+**/secrets.h
+.secrets/
+credentials.json
+secrets.json
+*.pem
+*.key

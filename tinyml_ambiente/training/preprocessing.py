@@ -46,6 +46,8 @@ def load_data(path):
               'invalid_rows': int((~valid).sum()), 'valid_rows': len(clean),
               'duplicate_features': int(clean.duplicated().sum()), 'unique_features': len(clean.drop_duplicates()),
               'statistics': clean.describe().to_dict(), 'presence_counts': clean.presenca.value_counts().to_dict()}
+    if 'origem' in raw.columns:
+        report['origin_counts'] = raw.loc[valid, 'origem'].astype(str).value_counts().to_dict()
     return clean, report
 
 def label_rules(data, path):

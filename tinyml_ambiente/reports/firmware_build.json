@@ -4,12 +4,17 @@
   "core_commit": "fd65f6d4ab168d4bb181a3709738fe353ac93585",
   "environments": {
     "picow": {
-      "flash_bytes": 301480,
-      "static_ram_bytes": 69152
+      "flash_bytes": 302184,
+      "static_ram_bytes": 69236
     },
     "picow_rules": {
       "flash_bytes": 301528,
       "static_ram_bytes": 69152
+    },
+    "picow_benchmark": {
+      "flash_bytes": 303184,
+      "static_ram_bytes": 69248,
+      "physical_benchmark_required": true
     }
   },
   "physical_test": false,

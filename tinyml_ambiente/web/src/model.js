@@ -12,11 +12,32 @@ export function exact(t, h, p) {
 export function tree(t,h,p) {
   if (!valid(t,h,p)) return null;
   t = Math.fround(t); h = Math.fround(h);
-  if (p <= .5) return t <= 29.5 ? h <= 79 ? 'normal' : h <= 89.5 ? 'alerta' : 'critico' : 'alerta';
-  return h <= 73.5 ? t <= 30 ? 'presenca' : 'critico' : 'critico';
+  if (p <= .5) {
+    if (t <= 29.85) return h <= 78.8 ? 'normal' : h <= 89.8 ? 'alerta' : 'critico';
+    return t <= 35 ? h <= 90.15 ? 'alerta' : 'critico' : 'critico';
+  }
+  if (t <= 31.8) {
+    if (h <= 80) return t <= 29.95 ? 'presenca' : 'alerta';
+    return h <= 85.05 ? 'alerta' : 'critico';
+  }
+  return 'critico';
 }
 export function parseSerial(line) {
+  try {
+    const reading = JSON.parse(line);
+    if (reading && reading.classe && valid(Number(reading.temperatura), Number(reading.umidade), Number(reading.presenca))) {
+      return {
+        temperatura_c: Number(reading.temperatura), umidade_pct: Number(reading.umidade),
+        presenca: Number(reading.presenca), classe: reading.classe,
+        ood: Boolean(reading.ood), tendencia_temp: Number(reading.tendencia_temp || 0),
+        tendencia_umidade: Number(reading.tendencia_umidade || 0),
+        media_temperatura: Number(reading.media_temperatura || reading.temperatura),
+        media_umidade: Number(reading.media_umidade || reading.umidade),
+        time: new Date().toLocaleTimeString('pt-BR')
+      };
+    }
+  } catch {}
   const m = line.match(/T=([\d.+-]+)\s+U=([\d.+-]+)\s+IR=([01])\s+presenca=([01])\s+classe=(normal|alerta|critico|presenca)\s*$/);
   if (!m || !valid(+m[1],+m[2],+m[4]) || +m[3] === +m[4]) return null;
-  return { temperatura_c: +m[1], umidade_pct: +m[2], presenca: +m[4], classe: m[5], time: new Date().toLocaleTimeString('pt-BR') };
+  return { temperatura_c: +m[1], umidade_pct: +m[2], presenca: +m[4], classe: m[5], ood: false, tendencia_temp: 0, tendencia_umidade: 0, time: new Date().toLocaleTimeString('pt-BR') };
 }

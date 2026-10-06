@@ -9,7 +9,7 @@ npm run dev
 
 Abra http://127.0.0.1:5173. Para compilar: `npm run build`; para visualizar a compilação: `npm run preview`. Verificações da classificação e parser serial: `npm test`.
 
-A visão geral carrega as 235 medições reais de `data/clean.csv`, oferece reprodução a cada dois segundos, gráficos, filtros e exportação CSV. O eixo horizontal é a ordem de aquisição: os registros não têm timestamps. A reprodução é uma visualização da coleta, não uma conexão com o hardware.
+A visão geral carrega a coleta expandida em `data/clean.csv`, oferece reprodução a cada dois segundos, gráficos, filtros e exportação CSV. O eixo horizontal é a ordem de aquisição quando não há timestamps. A reprodução é uma visualização da coleta, não uma conexão com o hardware.
 
 O simulador implementa a árvore de `models/model_data.h` com entradas float32 e compara seu resultado com `data/rules.json`. A página do modelo exibe as métricas do relatório de treinamento.
 
@@ -25,6 +25,7 @@ Diagnósticos são ignorados; erros de sensor geram um aviso. A tela preserva a 
 
 ## Atualizar a coleta e o treinamento
 
-Os dados são cópias locais para permitir uma aplicação estática. Após executar novamente o pipeline, copie `data/clean.csv`, `data/rules.json` e `reports/training.json` para `web/src/data/` e recompile. Se a árvore for retreinada, atualize `tree()` em `src/model.js` conforme o novo `models/model_data.h`. A árvore atual tem 17 nós e profundidade 4.
+Os dados são cópias locais para permitir uma aplicação estática. Após executar novamente o pipeline, copie `data/dataset_expanded.csv` para `web/src/data/clean.csv`, além de `reports/training.json`, e recompile. Se a árvore for retreinada, atualize `tree()` em `src/model.js` conforme o novo `models/model_data.h`. A árvore atual tem 25 nós e profundidade 4.
 
 A interface usa Google Fonts com fontes locais de fallback. Nenhum dado de sensor é enviado a um servidor.
+As leituras do Pico W usam JSON por linha e incluem médias/tendências da janela temporal e sinalização OOD. O painel mantém histórico local, registra eventos `alerta`/`critico` e permite exportar leituras e eventos em CSV. A classificação ocorre no dispositivo embarcado; a web é somente visualização e interação.

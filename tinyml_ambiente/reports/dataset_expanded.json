@@ -1,0 +1,16 @@
+{
+  "seed": 42,
+  "rows": 620,
+  "origin_counts": {
+    "sintetico": 385,
+    "real": 235
+  },
+  "class_counts": {
+    "critico": 155,
+    "presenca": 155,
+    "alerta": 155,
+    "normal": 155
+  },
+  "feature_unique": 463,
+  "synthetic_note": "A parte sintética amplia a cobertura de cenários; não substitui coleta real nem validação industrial."
+}

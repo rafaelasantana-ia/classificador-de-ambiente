@@ -22,7 +22,7 @@ from export import export_tree, export_rules
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data', default='data/dataset.xlsx')
+    parser.add_argument('--data', default='data/dataset_expanded.csv')
     parser.add_argument('--rules', required=True, help='Regras sintéticas fornecidas pelo usuário.')
     args = parser.parse_args()
     np.random.seed(42)

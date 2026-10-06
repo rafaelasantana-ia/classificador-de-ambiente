@@ -1,0 +1,190 @@
+{
+  "samples": 20000,
+  "divergences": 162,
+  "divergence_percent": 0.8099999999999999,
+  "agreement_percent": 99.19,
+  "divergences_by_pair": {
+    "alerta -> normal": 94,
+    "critico -> alerta": 54,
+    "alerta -> presenca": 10,
+    "alerta -> critico": 4
+  },
+  "examples": [
+    {
+      "temperatura_c": 29.969139099121094,
+      "umidade_pct": 40.303707122802734,
+      "presenca": 1.0,
+      "model": "alerta",
+      "rules": "presenca"
+    },
+    {
+      "temperatura_c": 18.680706024169922,
+      "umidade_pct": 79.76596069335938,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 31.97816276550293,
+      "umidade_pct": 24.444395065307617,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 11.927640914916992,
+      "umidade_pct": 79.93661499023438,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 14.801643371582031,
+      "umidade_pct": 79.3113021850586,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 9.361947059631348,
+      "umidade_pct": 79.335205078125,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 8.517059326171875,
+      "umidade_pct": 79.81938171386719,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 31.880449295043945,
+      "umidade_pct": 59.61470413208008,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 31.89683723449707,
+      "umidade_pct": 23.86026954650879,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 13.301543235778809,
+      "umidade_pct": 79.00719451904297,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 31.911178588867188,
+      "umidade_pct": 52.03923034667969,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 31.923376083374023,
+      "umidade_pct": 43.03641128540039,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 31.95136070251465,
+      "umidade_pct": 69.13037109375,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 15.160103797912598,
+      "umidade_pct": 79.91938781738281,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 31.833513259887695,
+      "umidade_pct": 34.48774337768555,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 29.97134017944336,
+      "umidade_pct": 26.66891860961914,
+      "presenca": 1.0,
+      "model": "alerta",
+      "rules": "presenca"
+    },
+    {
+      "temperatura_c": 12.084980010986328,
+      "umidade_pct": 79.22456359863281,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 8.142827987670898,
+      "umidade_pct": 78.83381652832031,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 29.89280128479004,
+      "umidade_pct": 0.04278850182890892,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 21.806821823120117,
+      "umidade_pct": 79.01443481445312,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 31.96063232421875,
+      "umidade_pct": 75.4350357055664,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    },
+    {
+      "temperatura_c": 11.097702026367188,
+      "umidade_pct": 78.98316955566406,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 15.47717571258545,
+      "umidade_pct": 79.74591064453125,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 29.888967514038086,
+      "umidade_pct": 39.05424499511719,
+      "presenca": 0.0,
+      "model": "alerta",
+      "rules": "normal"
+    },
+    {
+      "temperatura_c": 31.974721908569336,
+      "umidade_pct": 12.167978286743164,
+      "presenca": 1.0,
+      "model": "critico",
+      "rules": "alerta"
+    }
+  ],
+  "interpretation": "Divergências são esperadas em regiões pouco representadas; regras determinísticas continuam sendo o fallback de segurança."
+}

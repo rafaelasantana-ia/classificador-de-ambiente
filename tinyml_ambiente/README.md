@@ -141,3 +141,18 @@ Para gravar um UF2 já compilado: confira primeiro os GPIOs da montagem validada
 Para o experimento TinyML, use **Decision Tree exportada em C++**: melhor equilíbrio de F1 macro, transparência, tamanho e inferência simples; a MLP não teve vantagem em macro F1. Para operação com os limites atuais, use **as regras exatas** já incluídas. Colete mais presença, casos próximos aos limiares e sessões independentes antes de confiar no modelo fora desta coleta.
 
 Referências: [RP2040/Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/), [Pico W](https://datasheets.raspberrypi.com/picow/pico-w-datasheet.pdf), [integração oficial Arduino-Pico com PlatformIO](https://arduino-pico.readthedocs.io/en/latest/platformio.html), [biblioteca DHT da Adafruit](https://github.com/adafruit/DHT-sensor-library).
+## Evolução reproduzível
+
+O dataset original permanece em `data/dataset.xlsx` e `data/clean.csv`. A versão expandida é gerada deterministically em `data/dataset_expanded.csv` por `training/generate_dataset.py`: 620 linhas, 235 reais e 385 sintéticas, balanceadas em 155 por classe e com 463 combinações únicas. A coluna `origem` identifica a procedência. Dados sintéticos ampliam a cobertura, mas não substituem medições reais.
+
+Execute o fluxo completo a partir desta pasta:
+
+```powershell
+python training/pipeline.py
+```
+
+O pipeline gera dataset, modelo, headers C++, métricas por classe, matriz de confusão, comparação regras×modelo em 20 mil entradas e relatórios em `reports/`. Para verificar a equivalência C++ com um compilador disponível, use `python training/pipeline.py --compiler g++`.
+
+O firmware mantém as últimas 10 leituras em arrays fixos, calcula média e tendência e transmite JSON por linha a 115200 baud. Entradas fora de temperatura [20, 39,8] °C ou umidade [40, 98] % são marcadas como `ood: true` e classificadas pelas regras determinísticas. O ambiente PlatformIO `picow_benchmark` imprime média, mínimo, máximo de inferência e RAM livre a cada 10 leituras.
+
+Limitações: os rótulos continuam derivados das regras fornecidas, parte importante do dataset é sintética, não há timestamps de sessão na coleta original, e o benchmark precisa ser observado fisicamente no hardware. O projeto continua sendo uma prova de conceito acadêmica de TinyML, não um sistema industrial validado.
