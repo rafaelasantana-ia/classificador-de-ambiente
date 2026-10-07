@@ -22,6 +22,10 @@
   sem depender de internet, servidor ou computador ligado.
 </p>
 
+<h3 align="center">
+  🌐 <a href="https://classificador-de-ambiente.vercel.app">Acesse o painel ao vivo → classificador-de-ambiente.vercel.app</a>
+</h3>
+
 ---
 
 ## Sumário
