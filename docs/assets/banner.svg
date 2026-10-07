@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="Classificador de Ambiente — TinyML no Raspberry Pi Pico W">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1f18"/>
+      <stop offset="60%" stop-color="#14302a"/>
+      <stop offset="100%" stop-color="#1c3d33"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.35" r="0.55">
+      <stop offset="0%" stop-color="#438a73" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#438a73" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tempFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#db925e" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#db925e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="humFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5fb394" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#5fb394" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="420" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="420" rx="24" fill="url(#grid)"/>
+  <rect width="1280" height="420" rx="24" fill="url(#glow)"/>
+
+  <!-- logo -->
+  <g transform="translate(72 64)">
+    <rect width="56" height="56" rx="16" fill="#ffffff" fill-opacity="0.06" stroke="#9fd3bd" stroke-opacity="0.35"/>
+    <path d="M17 39c0-13 9-22 23-22 0 14-9 23-22 23" fill="none" stroke="#b9e3cf" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M17 40l13-13" fill="none" stroke="#b9e3cf" stroke-width="2.6" stroke-linecap="round"/>
+    <text x="74" y="38" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="26" font-weight="600" fill="#f3f7f4">ambiente<tspan fill="#db925e">.</tspan></text>
+  </g>
+
+  <!-- headline -->
+  <text x="72" y="190" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="54" font-weight="700" fill="#f3f7f4" letter-spacing="-1">Classificador de Ambiente</text>
+  <text x="72" y="230" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="22" fill="#b7c8c0">Monitoramento ambiental inteligente com TinyML</text>
+  <text x="72" y="260" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="22" fill="#b7c8c0">embarcado no Raspberry Pi Pico W</text>
+
+  <!-- class chips -->
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="16" font-weight="600">
+    <g transform="translate(72 292)">
+      <rect width="112" height="36" rx="18" fill="#438a73" fill-opacity="0.18" stroke="#5fb394" stroke-opacity="0.6"/>
+      <circle cx="22" cy="18" r="5" fill="#5fb394"/><text x="36" y="24" fill="#cfeee0">Normal</text>
+    </g>
+    <g transform="translate(196 292)">
+      <rect width="126" height="36" rx="18" fill="#9a88ba" fill-opacity="0.18" stroke="#9a88ba" stroke-opacity="0.7"/>
+      <circle cx="22" cy="18" r="5" fill="#b3a3d3"/><text x="36" y="24" fill="#e2daf2">Presença</text>
+    </g>
+    <g transform="translate(334 292)">
+      <rect width="104" height="36" rx="18" fill="#dba15e" fill-opacity="0.18" stroke="#dba15e" stroke-opacity="0.7"/>
+      <circle cx="22" cy="18" r="5" fill="#e8b57a"/><text x="36" y="24" fill="#f6e2c8">Alerta</text>
+    </g>
+    <g transform="translate(450 292)">
+      <rect width="110" height="36" rx="18" fill="#cf7068" fill-opacity="0.2" stroke="#cf7068" stroke-opacity="0.75"/>
+      <circle cx="22" cy="18" r="5" fill="#e08a82"/><text x="36" y="24" fill="#f6d3cf">Crítico</text>
+    </g>
+  </g>
+
+  <!-- tech line -->
+  <text x="72" y="370" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#8fa69c" letter-spacing="1.5">RP2040 · DHT11 · SENSOR IR · DECISION TREE EM C++ · REACT · SUPABASE</text>
+
+  <!-- dashboard card -->
+  <g transform="translate(800 70)">
+    <rect width="408" height="280" rx="20" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.12"/>
+    <text x="24" y="38" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="14" fill="#9fb5ab" letter-spacing="1.2">INFERÊNCIA NA PLACA</text>
+    <g transform="translate(298 20)">
+      <rect width="86" height="26" rx="13" fill="#dba15e" fill-opacity="0.2"/>
+      <circle cx="16" cy="13" r="4" fill="#e8b57a"/>
+      <text x="27" y="18" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" fill="#f6e2c8">Alerta</text>
+    </g>
+    <text x="24" y="92" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="40" font-weight="600" fill="#f3f7f4">30,4<tspan font-size="20" fill="#9fb5ab"> °C</tspan></text>
+    <text x="196" y="92" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="40" font-weight="600" fill="#f3f7f4">72<tspan font-size="20" fill="#9fb5ab"> %</tspan></text>
+    <text x="24" y="116" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#8fa69c">temperatura</text>
+    <text x="196" y="116" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#8fa69c">umidade relativa</text>
+
+    <!-- chart -->
+    <g transform="translate(24 140)">
+      <path d="M0 90 H360" stroke="#ffffff" stroke-opacity="0.08"/>
+      <path d="M0 55 H360" stroke="#ffffff" stroke-opacity="0.05" stroke-dasharray="3 5"/>
+      <path d="M0 20 H360" stroke="#ffffff" stroke-opacity="0.05" stroke-dasharray="3 5"/>
+      <path d="M0 52 C20 40 34 70 54 58 S90 22 112 34 S150 66 172 50 S210 18 232 30 S270 60 292 42 S330 14 360 22 V90 H0Z" fill="url(#humFill)"/>
+      <path d="M0 52 C20 40 34 70 54 58 S90 22 112 34 S150 66 172 50 S210 18 232 30 S270 60 292 42 S330 14 360 22" fill="none" stroke="#5fb394" stroke-width="2.4"/>
+      <path d="M0 74 C24 70 40 78 64 72 S104 62 128 66 S170 56 196 58 S240 44 264 46 S320 30 360 34 V90 H0Z" fill="url(#tempFill)"/>
+      <path d="M0 74 C24 70 40 78 64 72 S104 62 128 66 S170 56 196 58 S240 44 264 46 S320 30 360 34" fill="none" stroke="#db925e" stroke-width="2.4"/>
+      <circle cx="360" cy="34" r="5" fill="#db925e" stroke="#14302a" stroke-width="2"/>
+      <path d="M360 34 L360 12" stroke="#db925e" stroke-opacity="0.6" stroke-dasharray="2 3"/>
+      <text x="292" y="8" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="12" fill="#e8b57a">+60 s: 31,2 °C</text>
+    </g>
+    <text x="24" y="258" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" fill="#8fa69c">Decision Tree · 25 nós · F1 macro 99,3%</text>
+  </g>
+</svg>
