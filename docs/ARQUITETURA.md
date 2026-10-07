@@ -60,7 +60,7 @@ Executado integralmente por `python training/pipeline.py`, de forma determiníst
 | Regressão temporal | `generate_regression_dataset.py`, `train_regression.py` | `models/regressor_data.h` |
 | Verificação Python × C++ | `verify_export.py`, `verify_regression.py` | `reports/*_verification.json` |
 
-**Exportação sem dependências.** Em vez de TensorFlow Lite Micro, o modelo é convertido para arrays C++ (`model_data.h`): cada nó guarda feature, limiar e filhos. Isso elimina tensor arena, bibliotecas de ML e conversões de tipo na placa. A equivalência é verificada compilando o header e comparando suas saídas com o scikit-learn em mais de 13 mil entradas, incluindo valores imediatamente ao redor de cada limiar.
+**Exportação sem dependências.** Em vez de TensorFlow Lite Micro, a árvore treinada é convertida automaticamente em uma função C++ com `if/else` aninhados (`model_data.h`): cada nó interno vira uma comparação e cada folha, um `return` da classe. Isso elimina tensor arena, bibliotecas de ML e conversões de tipo na placa. A equivalência é verificada compilando o header e comparando suas saídas com o scikit-learn em mais de 13 mil entradas, incluindo valores imediatamente ao redor de cada limiar.
 
 ## 2. Firmware (`tinyml_ambiente/firmware/`)
 

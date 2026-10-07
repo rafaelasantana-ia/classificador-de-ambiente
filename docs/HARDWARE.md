@@ -13,6 +13,11 @@
 | 1 | Buzzer passivo | Alarme sonoro (2 kHz) |
 | 1 | Protoboard, jumpers e cabo micro-USB | Montagem e alimentação |
 
+<p align="center">
+  <img src="assets/componentes.jpg" alt="Componentes" width="40%">
+  <img src="assets/prototipo-montado.jpg" alt="Protótipo montado" width="40%">
+</p>
+
 ## Pinagem
 
 Numeração GPIO (não é o número do pino físico da placa).
@@ -45,6 +50,20 @@ flowchart LR
 ```
 
 > Use sinais compatíveis com 3,3 V e GND comum. Para buzzer **ativo**, troque `tone/noTone` por nível lógico em `main.cpp` e, se necessário, use um transistor como estágio de acionamento.
+
+## Validação antes da IA
+
+Antes de qualquer treinamento, cada componente foi testado isoladamente em **MicroPython** (IDE Thonny):
+
+| Componente | Teste | Resultado |
+|---|---|---|
+| DHT11 | Leitura periódica a cada 2 s (o sensor não suporta leituras mais rápidas) | Temperatura e umidade estáveis após mover o sinal para o GP2 |
+| Sensor IR | Aproximar e afastar um objeto | Ativo em nível baixo: `IR=0` = presença, `IR=1` = ausência |
+| LED e buzzer | Acionamento manual | Funcionando antes de integrar a classificação |
+
+<p align="center"><img src="assets/validacao-sensores-thonny.png" alt="Teste dos sensores no Thonny" width="60%"></p>
+
+Durante esses testes também foi avaliado um módulo joystick. Como não contribuía para a classificação do ambiente, ele saiu da montagem final, que ficou mais simples e com menos pontos de falha.
 
 ## Comportamento dos atuadores
 
@@ -82,6 +101,8 @@ Ambientes disponíveis: `picow`, `picow_rules`, `picow_benchmark`, `picow_cloud`
 > Gravar o firmware C++ substitui a instalação MicroPython da placa. Faça backup dos arquivos que quiser manter.
 
 ## Diagnóstico pela serial
+
+<p align="center"><img src="assets/saida-serial-pico.png" alt="Saída serial do Pico W" width="60%"></p>
 
 | Saída | Significado |
 |---|---|

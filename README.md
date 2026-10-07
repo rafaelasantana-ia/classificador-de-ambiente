@@ -33,6 +33,7 @@
 - [Contexto e problema](#contexto-e-problema)
 - [A solução](#a-solução)
 - [Demonstração](#demonstração)
+- [Do protótipo ao produto](#do-protótipo-ao-produto)
 - [Arquitetura](#arquitetura)
 - [Como o ambiente é classificado](#como-o-ambiente-é-classificado)
 - [Resultados](#resultados)
@@ -40,6 +41,7 @@
 - [Como executar](#como-executar)
 - [Estrutura do repositório](#estrutura-do-repositório)
 - [Documentação completa](#documentação-completa)
+- [Decisões técnicas: quantização e if/else](#decisões-técnicas-quantização-e-ifelse)
 - [Limitações e próximos passos](#limitações-e-próximos-passos)
 - [Equipe](#equipe)
 
@@ -84,6 +86,18 @@ O **Classificador de Ambiente** é um sistema de **TinyML** (Machine Learning em
 
 <table>
   <tr>
+    <td width="34%" align="center"><img src="docs/assets/demo-tempo-real.gif" alt="Protótipo físico enviando leituras para o painel em tempo real" width="100%"></td>
+    <td width="66%">
+      <b>Sistema funcionando de ponta a ponta</b><br><br>
+      O protótipo na bancada lê os sensores, classifica o ambiente <i>na própria placa</i>, aciona o LED e envia a leitura por Wi-Fi.
+      Segundos depois, o painel publicado na Vercel mostra a mesma leitura, vinda do Supabase.<br><br>
+      Nenhum computador processa os dados: o notebook só exibe o site.
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
     <td colspan="2"><img src="docs/assets/dashboard-overview.png" alt="Visão geral do painel com métricas, gráfico temporal e distribuição dos estados"></td>
   </tr>
   <tr>
@@ -99,6 +113,40 @@ O **Classificador de Ambiente** é um sistema de **TinyML** (Machine Learning em
     <td align="center"><b>Modelo TinyML</b> — comparação e matriz de confusão</td>
   </tr>
 </table>
+
+## Do protótipo ao produto
+
+O projeto foi construído em etapas, validando cada camada antes de avançar para a próxima.
+
+<table>
+  <tr>
+    <td width="50%" align="center"><img src="docs/assets/componentes.jpg" alt="Componentes do projeto sobre a protoboard" width="100%"></td>
+    <td width="50%" align="center"><img src="docs/assets/prototipo-montado.jpg" alt="Protótipo montado com Pico W, DHT11, sensor IR, LED e buzzer" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>1. Seleção dos componentes</b><br><sub>Pico W, DHT11, sensor IR, LED, buzzer e resistores</sub></td>
+    <td align="center"><b>2. Montagem do protótipo</b><br><sub>Pinagem final: DHT11 GP2 · IR GP14 · LED GP16 · buzzer GP17</sub></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><img src="docs/assets/validacao-sensores-thonny.png" alt="Teste dos sensores em MicroPython no Thonny" width="100%"></td>
+    <td width="50%" align="center"><img src="docs/assets/saida-serial-pico.png" alt="Saída serial do firmware C++ com a classe prevista" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>3. Validação isolada dos sensores</b><br><sub>Cada componente testado em MicroPython (Thonny) antes de qualquer IA</sub></td>
+    <td align="center"><b>4. Modelo rodando na placa</b><br><sub>Firmware C++ gravado via UF2, classe prevista na serial a 115200 baud</sub></td>
+  </tr>
+</table>
+
+| Etapa | O que foi feito | Evidência |
+|:---:|---|---|
+| 1 | Seleção de componentes e definição da pinagem | Fotos acima, [HARDWARE.md](docs/HARDWARE.md) |
+| 2 | Teste isolado de cada sensor e atuador em MicroPython | Leitura estável do DHT11; IR confirmado como ativo em nível baixo |
+| 3 | Coleta de 235 medições reais com o protótipo | [`data/dataset.xlsx`](tinyml_ambiente/data/dataset.xlsx) |
+| 4 | Limpeza, expansão do dataset e treinamento de 5 modelos | [METODOLOGIA.md](docs/METODOLOGIA.md) |
+| 5 | Exportação da árvore para C++ e verificação contra o Python | 13.224 casos, 0 divergências |
+| 6 | Gravação do firmware via BOOTSEL/UF2 e teste na serial | Saída `classe=normal` na placa |
+| 7 | Nuvem (Supabase) e painel web publicado (Vercel) | [Painel ao vivo](https://classificador-de-ambiente.vercel.app) |
+| 8 | Previsão temporal +60 s e fallback para regras fora do domínio | [ARQUITETURA.md](docs/ARQUITETURA.md) |
 
 ## Arquitetura
 
@@ -284,6 +332,40 @@ classificador-de-ambiente/
 | [tinyml_ambiente/README.md](tinyml_ambiente/README.md) | Relatório técnico detalhado do experimento TinyML |
 | [tinyml_ambiente/web/README.md](tinyml_ambiente/web/README.md) | Guia do painel React |
 | [supabase/README.md](supabase/README.md) | Passo a passo da integração com a nuvem |
+
+## Decisões técnicas: quantização e if/else
+
+<details>
+<summary><b>Por que não usamos quantização (INT8)?</b></summary>
+<br>
+
+Quantização converte pesos e ativações de uma **rede neural** de float32 para inteiros de 8 bits. Ela reduz a memória em cerca de 4× e acelera multiplicações em hardware sem unidade de ponto flutuante. No nosso caso ela não traz ganho:
+
+- **O modelo escolhido não tem pesos.** A árvore de decisão só faz comparações (`temperatura <= 29,95`). Não há multiplicações para acelerar nem tensores para comprimir: são 12 limiares e 13 folhas.
+- **A memória já é desprezível.** O modelo inteiro cabe em poucas centenas de bytes, contra 264 kB de RAM disponíveis. O firmware completo usa cerca de 26 % da RAM, e quase tudo isso vem do core Arduino, do Wi-Fi e dos drivers, não do modelo.
+- **Quantizar poderia introduzir erro.** Arredondar um limiar como 29,95 °C muda a fronteira de decisão. Mantendo float, a saída em C++ é **idêntica** à do scikit-learn (0 divergências em 13.224 casos).
+- **A MLP, que se beneficiaria, não foi selecionada.** Ela teve F1 menor que a árvore e exigiria normalização das entradas e um runtime como o TensorFlow Lite Micro. Esse runtime ocuparia dezenas de kB de flash e uma *tensor arena* em RAM, muito mais que o próprio modelo.
+
+Uma otimização possível no futuro seria usar **ponto fixo**, guardando a temperatura em décimos de grau num inteiro. Isso não perde nada, porque o sensor já entrega no máximo uma casa decimal.
+
+</details>
+
+<details>
+<summary><b>Por que não escrever simplesmente if/else?</b></summary>
+<br>
+
+Há duas formas de entender a pergunta:
+
+**1. "O modelo poderia ser if/else?"** Ele **é**. A árvore treinada é exportada automaticamente como `if/else` aninhados em [`model_data.h`](tinyml_ambiente/models/model_data.h), com até 4 comparações por inferência. A diferença está em **quem escreveu os limiares**: eles foram **aprendidos a partir dos dados** pelo algoritmo, não digitados à mão. Essa é justamente a vantagem de uma árvore de decisão para TinyML: o resultado é interpretável e roda sem nenhuma biblioteca.
+
+**2. "Por que usar ML se as regras já existem?"** O projeto também tem as regras escritas à mão ([`rules_data.h`](tinyml_ambiente/models/rules_data.h)). Elas são usadas como **fallback** fora do domínio de treino e na variante `picow_rules`. Usamos ML porque:
+
+- **O pipeline é o produto.** Coleta, treino, validação, exportação e verificação funcionam para *qualquer* rótulo. Com rótulos observados em campo (por exemplo, "as pessoas relataram desconforto"), não existe regra conhecida para escrever. O modelo descobre as fronteiras, e o restante do sistema continua igual.
+- **Regras fixas não se adaptam.** Para outro ambiente, como um laboratório, um quarto ou um almoxarifado, basta retreinar com novos dados e regravar o firmware, sem reescrever lógica.
+- **A previsão temporal não é uma regra.** Prever a temperatura em +60 s a partir de médias e tendências da janela é uma regressão aprendida, que nenhum `if` simples substitui.
+- **O ML foi auditado contra as regras.** Medimos onde a árvore concorda com a política (98,2 % em 20.000 entradas) e onde diverge. Por isso o firmware usa as regras como rede de segurança.
+
+</details>
 
 ## Limitações e próximos passos
 
