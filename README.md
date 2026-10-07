@@ -209,6 +209,20 @@ As classes seguem uma política de prioridade definida para o projeto (a primeir
 
 ## Resultados
 
+### Evolução: dos testes iniciais à versão final
+
+A primeira versão, treinada só com as 235 medições reais, chegou a **F1 macro de 0,73**. Os testes mostraram a causa: apenas 5 exemplos de presença e nenhuma leitura acima de 35 °C. Com o dataset expandido nas regiões não cobertas e uma validação mais rigorosa, a árvore chegou a **0,99**.
+
+| | Versão inicial | Versão final |
+|---|:---:|:---:|
+| Registros / combinações únicas | 235 / 79 | 1.000 / 844 |
+| Exemplos da classe presença | 5 | 250 |
+| Validação cruzada / amostras de teste | 2 folds / 20 | 5 folds / 127 |
+| Árvore de decisão | 17 nós | 25 nós |
+| **F1 macro da árvore (CV)** | **0,728** | **0,990** |
+
+Detalhes em [METODOLOGIA.md](docs/METODOLOGIA.md#22-testes-iniciais-a-primeira-versão-do-modelo).
+
 ### Comparação de modelos
 
 Validação cruzada estratificada (5 folds) no conjunto de treino, seguida de avaliação em teste reservado de **127 combinações únicas** nunca vistas no treino.

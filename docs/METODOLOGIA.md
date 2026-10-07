@@ -34,7 +34,48 @@ A coleta foi feita com o próprio protótipo (Pico W + DHT11 + IR) e registrada 
 
 **Problema identificado:** a coleta real é **desbalanceada** (apenas 5 registros da classe `presenca`) e **não cobre** temperaturas ≥ 35 °C. Um modelo treinado só com ela não teria como aprender esses limiares.
 
-### 2.2 Expansão do dataset
+### 2.2 Testes iniciais: a primeira versão do modelo
+
+Antes da versão final, o pipeline completo foi executado **apenas com a coleta real**. Esses testes iniciais foram decisivos para orientar o restante do trabalho.
+
+| Aspecto | Primeira versão |
+|---|---|
+| Dados | 235 medições, 79 combinações únicas |
+| Distribuição dos rótulos (registros) | normal 135 · crítico 50 · alerta 45 · **presença 5** |
+| Split | 59 combinações para treino, 20 para teste |
+| Validação cruzada | 2 folds (limitada pelas 2 amostras de presença no treino) |
+| Modelo selecionado | Decision Tree, 17 nós, profundidade 4 |
+
+**F1 macro na validação cruzada (primeira versão):**
+
+| Modelo | F1 macro |
+|---|:---:|
+| Baseline | 0,140 |
+| Logistic Regression | 0,613 |
+| MLP (8, 4) | 0,701 |
+| Decision Tree | 0,728 |
+| Random Forest | 0,756 |
+
+**O que os testes revelaram:**
+
+1. **Desempenho baixo:** nenhum modelo passou de 0,76 de F1 macro.
+2. **Classe presença quase ausente:** só 5 registros. O teste tinha 20 amostras e apenas **1** de presença, então o acerto de 100 % nesse conjunto não tinha valor estatístico.
+3. **Limiar nunca observado:** não havia nenhuma leitura com T ≥ 35 °C. Uma árvore não aprende um limiar que não aparece nos dados. Na grade completa de entradas, a árvore divergiu das regras em **23,45 %** dos casos (por exemplo, 35 °C e 60 % sem presença: árvore → `alerta`, regras → `critico`).
+4. **O firmware já compilava e rodava** (301 kB de flash, 69 kB de RAM), o que validou a cadeia de exportação antes de investir nos dados.
+
+Esse diagnóstico definiu as mudanças da versão final: expandir o dataset nas regiões não cobertas, balancear as classes, usar 5 folds e um teste maior, e adicionar o fallback para regras fora do domínio de treino.
+
+| | Versão inicial | Versão final |
+|---|:---:|:---:|
+| Registros | 235 | 1.000 |
+| Combinações únicas | 79 | 844 |
+| Exemplos por classe | 5 a 135 | 250 |
+| Validação cruzada | 2 folds | 5 folds |
+| Amostras de teste | 20 | 127 |
+| Árvore | 17 nós | 25 nós |
+| **F1 macro da árvore (CV)** | **0,728** | **0,990** |
+
+### 2.3 Expansão do dataset
 
 Para cobrir o espaço de entrada, `generate_dataset.py` gera amostras sintéticas de forma determinística, concentrando parte delas **próximo aos limiares** de decisão, onde o modelo tem mais chance de errar.
 
