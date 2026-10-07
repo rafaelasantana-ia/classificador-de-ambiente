@@ -22,6 +22,10 @@
   sem depender de internet, servidor ou computador ligado.
 </p>
 
+<p align="center">
+  <sub><b>SENAI Santa Catarina</b> · Pós-graduação em Inteligência Artificial Aplicada · IA Embarcada e Modelos Compactos</sub>
+</p>
+
 <h3 align="center">
   🌐 <a href="https://classificador-de-ambiente.vercel.app">Acesse o painel ao vivo → classificador-de-ambiente.vercel.app</a>
 </h3>
@@ -394,12 +398,21 @@ Transparência sobre o que os resultados **não** demonstram faz parte do projet
 
 ## Equipe
 
-Projeto acadêmico de Sistemas Embarcados e Inteligência Artificial.
+| | |
+|---|---|
+| **Instituição** | SENAI Santa Catarina |
+| **Curso** | Pós-graduação em Inteligência Artificial Aplicada |
+| **Turma** | PG PGIA 2025/2 1 |
+| **Unidade curricular** | IA Embarcada e Modelos Compactos (489780) |
+| **Professor** | Rodrigo Kobashikawa Rosa |
+
+**Integrantes**
 
 | | Integrante |
 |:---:|---|
-| <img src="https://github.com/rafaelasantana-ia.png" width="60" style="border-radius:50%"> | **[@rafaelasantana-ia](https://github.com/rafaelasantana-ia)** — autora |
-| <img src="https://github.com/eumoas.png" width="60" style="border-radius:50%"> | **[@eumoas](https://github.com/eumoas)** — colaboração |
+| <img src="https://github.com/rafaelasantana-ia.png" width="60" style="border-radius:50%"> | **Rafaela Santana** · [@rafaelasantana-ia](https://github.com/rafaelasantana-ia) |
+| <img src="https://github.com/eumoas.png" width="60" style="border-radius:50%"> | **Miriam** · [@eumoas](https://github.com/eumoas) |
+| 👤 | **Sara Coutinho** |
 
 ---
 
