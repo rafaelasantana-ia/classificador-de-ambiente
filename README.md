@@ -136,8 +136,8 @@ flowchart LR
     subgraph Treino["Pipeline de treino · Python"]
         DATA[Coleta real +<br/>dados sintéticos] --> ML[scikit-learn<br/>5 modelos] --> EXP[Exportação<br/>para header C++]
     end
-    EXP -. model_data.h .-> TREE
-    EXP -. regressor_data.h .-> REG
+    EXP -.->|model_data.h| TREE
+    EXP -.->|regressor_data.h| REG
 ```
 
 Detalhes de cada componente, protocolos e decisões de projeto em **[docs/ARQUITETURA.md](docs/ARQUITETURA.md)**.
