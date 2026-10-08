@@ -323,6 +323,7 @@ Montagem, pinagem e variantes do firmware em **[docs/HARDWARE.md](docs/HARDWARE.
 
 ```text
 classificador-de-ambiente/
+├── .github/workflows/         # CI: testes e build do painel
 ├── docs/                       # Documentação do projeto e imagens
 │   ├── entrega/                # Apresentação (PDF/PPTX) e descrição do projeto final
 │   ├── ARQUITETURA.md
@@ -350,6 +351,7 @@ classificador-de-ambiente/
 | [tinyml_ambiente/README.md](tinyml_ambiente/README.md) | Relatório técnico detalhado do experimento TinyML |
 | [tinyml_ambiente/web/README.md](tinyml_ambiente/web/README.md) | Guia do painel React |
 | [supabase/README.md](supabase/README.md) | Passo a passo da integração com a nuvem |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Fluxo de trabalho com Git Flow, branches e pull requests |
 | [Apresentação (PDF)](docs/entrega/Apresentacao-Classificador-de-Ambiente.pdf) · [PPTX](docs/entrega/Apresentacao-Classificador-de-Ambiente.pptx) | Slides da apresentação final |
 | [Descrição do projeto final](docs/entrega/Descricao-do-projeto-final.pdf) | Enunciado e critérios de avaliação da unidade curricular |
 
