@@ -45,7 +45,6 @@
 - [Como executar](#como-executar)
 - [Estrutura do repositório](#estrutura-do-repositório)
 - [Documentação completa](#documentação-completa)
-- [Decisões técnicas: quantização e if/else](#decisões-técnicas-quantização-e-ifelse)
 - [Limitações e próximos passos](#limitações-e-próximos-passos)
 - [Equipe](#equipe)
 
@@ -353,40 +352,6 @@ classificador-de-ambiente/
 | [supabase/README.md](supabase/README.md) | Passo a passo da integração com a nuvem |
 | [Apresentação (PDF)](docs/entrega/Apresentacao-Classificador-de-Ambiente.pdf) · [PPTX](docs/entrega/Apresentacao-Classificador-de-Ambiente.pptx) | Slides da apresentação final |
 | [Descrição do projeto final](docs/entrega/Descricao-do-projeto-final.pdf) | Enunciado e critérios de avaliação da unidade curricular |
-
-## Decisões técnicas: quantização e if/else
-
-<details>
-<summary><b>Por que não usamos quantização (INT8)?</b></summary>
-<br>
-
-Quantização converte pesos e ativações de uma **rede neural** de float32 para inteiros de 8 bits. Ela reduz a memória em cerca de 4× e acelera multiplicações em hardware sem unidade de ponto flutuante. No nosso caso ela não traz ganho:
-
-- **O modelo escolhido não tem pesos.** A árvore de decisão só faz comparações (`temperatura <= 29,95`). Não há multiplicações para acelerar nem tensores para comprimir: são 12 limiares e 13 folhas.
-- **A memória já é desprezível.** O modelo inteiro cabe em poucas centenas de bytes, contra 264 kB de RAM disponíveis. O firmware completo usa cerca de 26 % da RAM, e quase tudo isso vem do core Arduino, do Wi-Fi e dos drivers, não do modelo.
-- **Quantizar poderia introduzir erro.** Arredondar um limiar como 29,95 °C muda a fronteira de decisão. Mantendo float, a saída em C++ é **idêntica** à do scikit-learn (0 divergências em 13.224 casos).
-- **A MLP, que se beneficiaria, não foi selecionada.** Ela teve F1 menor que a árvore e exigiria normalização das entradas e um runtime como o TensorFlow Lite Micro. Esse runtime ocuparia dezenas de kB de flash e uma *tensor arena* em RAM, muito mais que o próprio modelo.
-
-Uma otimização possível no futuro seria usar **ponto fixo**, guardando a temperatura em décimos de grau num inteiro. Isso não perde nada, porque o sensor já entrega no máximo uma casa decimal.
-
-</details>
-
-<details>
-<summary><b>Por que não escrever simplesmente if/else?</b></summary>
-<br>
-
-Há duas formas de entender a pergunta:
-
-**1. "O modelo poderia ser if/else?"** Ele **é**. A árvore treinada é exportada automaticamente como `if/else` aninhados em [`model_data.h`](tinyml_ambiente/models/model_data.h), com até 4 comparações por inferência. A diferença está em **quem escreveu os limiares**: eles foram **aprendidos a partir dos dados** pelo algoritmo, não digitados à mão. Essa é justamente a vantagem de uma árvore de decisão para TinyML: o resultado é interpretável e roda sem nenhuma biblioteca.
-
-**2. "Por que usar ML se as regras já existem?"** O projeto também tem as regras escritas à mão ([`rules_data.h`](tinyml_ambiente/models/rules_data.h)). Elas são usadas como **fallback** fora do domínio de treino e na variante `picow_rules`. Usamos ML porque:
-
-- **O pipeline é o produto.** Coleta, treino, validação, exportação e verificação funcionam para *qualquer* rótulo. Com rótulos observados em campo (por exemplo, "as pessoas relataram desconforto"), não existe regra conhecida para escrever. O modelo descobre as fronteiras, e o restante do sistema continua igual.
-- **Regras fixas não se adaptam.** Para outro ambiente, como um laboratório, um quarto ou um almoxarifado, basta retreinar com novos dados e regravar o firmware, sem reescrever lógica.
-- **A previsão temporal não é uma regra.** Prever a temperatura em +60 s a partir de médias e tendências da janela é uma regressão aprendida, que nenhum `if` simples substitui.
-- **O ML foi auditado contra as regras.** Medimos onde a árvore concorda com a política (98,2 % em 20.000 entradas) e onde diverge. Por isso o firmware usa as regras como rede de segurança.
-
-</details>
 
 ## Limitações e próximos passos
 
