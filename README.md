@@ -415,7 +415,7 @@ Transparência sobre o que os resultados **não** demonstram faz parte do projet
 |:---:|---|
 | <img src="https://github.com/rafaelasantana-ia.png" width="60" style="border-radius:50%"> | **Rafaela Santana** · [@rafaelasantana-ia](https://github.com/rafaelasantana-ia) |
 | <img src="https://github.com/eumoas.png" width="60" style="border-radius:50%"> | **Miriam Aguiar** · [@eumoas](https://github.com/eumoas) |
-| <img src="https://github.com/SaraBCoutinho.png" width="60" style="border-radius:50%"> | **Sara Coutinho** · [@SBC] |
+| <img src="https://github.com/SaraBCoutinho.png" width="60" style="border-radius:50%"> | **Sara Coutinho** · [@SaraBCoutinho] (https://github.com/SaraBCoutinho)|
 
 ---
 
